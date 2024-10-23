@@ -1,0 +1,95 @@
+﻿@model AppForPets.Models.CompraProveedor
+
+@{
+    ViewData["Title"] = "Detalles Compra";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>CompraProveedor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.Nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.PrimerApellido)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.PrimerApellido)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.SegundoApellido)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.SegundoApellido)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCompra)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaCompra)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DireccionEnvio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DireccionEnvio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TelefonoContacto)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TelefonoContacto)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioTotal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrecioTotal)
+        </dd>
+
+    </dl>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Precio
+                </th>
+                <th>
+                    Cantidad
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.CompraItems.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.CompraItems.ElementAt<CompraProvItem>(i).ProductoProveedor.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.CompraItems.ElementAt<CompraProvItem>(i).ProductoProveedor.Precio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.CompraItems.ElementAt<CompraProvItem>(i).Cantidad)
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdCompraProveedor">Editar</a> |
+    <a asp-action="Index">Volver a la lista de compras</a>
+</div>

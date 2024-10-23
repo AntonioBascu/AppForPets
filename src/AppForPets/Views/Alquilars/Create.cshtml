@@ -1,0 +1,113 @@
+﻿@model AppForPets.Models.AlquilarViewModel.AlquilarCreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<h2>Create</h2>
+
+<form asp-action="Create" method="post">
+
+    <div class="form-horizontal">
+        <h4>Alquiler</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PrimerApellido)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PrimerApellido)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SegundoApellido)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SegundoApellido)
+            </dd>
+        </dl>
+
+        <input asp-for="ClienteId" type="hidden" class="form-control" />
+
+      
+        <div id="ModelErrors" asp-validation-summary="ModelOnly" class="text-danger">
+        </div>
+
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th width="50%">
+                        Title
+                    </th>
+                    <th width="20%">
+                        Price
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.AlquilarProductos.Count() == 0)
+                {
+                    <tr><td colspan="3">There are no productos available</td></tr>
+                }
+                else
+                {
+                    @for (int i = 0; i < Model.AlquilarProductos.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.AlquilarProductos[i].NombreProducto)
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    @Html.DisplayFor(modelItem => Model.AlquilarProductos[i].PrecioAlquiler)
+
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <input asp-for="AlquilarProductos[i].ProductoID" type="hidden" class="form-control" />
+                                    <input asp-for="AlquilarProductos[i].PrecioAlquiler" type="hidden" class="form-control" />
+                                    <input asp-for="AlquilarProductos[i].NombreProducto" type="hidden" class="form-control" />
+                                    <input asp-for="AlquilarProductos[i].TipoAnimal" type="hidden" class="form-control" />
+                                    <input asp-for="AlquilarProductos[i].CantidadAlquiler" id="Movie_Quantity_@Model.AlquilarProductos[i].ProductoID" class="form-control" />
+                                    <span asp-validation-for="AlquilarProductos[i].CantidadAlquiler" class="text-danger" />
+
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="CreateButton" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+

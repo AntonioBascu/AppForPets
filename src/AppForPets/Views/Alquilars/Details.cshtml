@@ -1,0 +1,83 @@
+﻿@model AppForPets.Models.Alquilar
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Alquiler</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.Nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.PrimerApellido)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.PrimerApellido)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.SegundoApellido)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.SegundoApellido)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaInicio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioTotal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrecioTotal)
+        </dd>
+
+    </dl>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Quantity
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.AlquilarProductos.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.AlquilarProductos.ElementAt<AlquilarProductos>(i).Producto.NombreProducto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.AlquilarProductos.ElementAt<AlquilarProductos>(i).Producto.PrecioAlquiler)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.AlquilarProductos.ElementAt<AlquilarProductos>(i).Cantidad)
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AlquilarID">Edita</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

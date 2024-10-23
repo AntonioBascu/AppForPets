@@ -1,0 +1,93 @@
+﻿@model AppForPets.Models.EsteticaViewModels.SelectServiciosForEsteticaViewModels
+
+@{
+    ViewData["Title"] = "Select Servicios";
+}
+
+<h1>Seleccionar Servicios de Estética</h1>
+
+@*Sirve para controlar los filtros que vamos a proporcionar*@
+
+<form asp-controller="Esteticas" class="form-horizontal" aspaction="SelectServiciosForEstetica" method="get">
+    <p>
+        <div>
+            <label asp-for="Tiempo_Duracion"></label>
+            <input asp-for="Tiempo_Duracion" size="20" />
+            <span asp-validation-for="Tiempo_Duracion" class="text-danger"></span>
+
+            @*<label asp-for="Nombre"></label>
+            <input asp-for="Nombre" size="20" />
+            <span asp-validation-for="Nombre" class="text-danger"></span>*@
+            
+            <label asp-for="Nombre"></label>
+            <select asp-for="Nombre" asp-items="Model.Tipo_Servicios">
+            <option value="">All</option>
+            </select>
+
+            <input id="filterbyTipoServicio" type="submit" value="Filter" />
+        </div>
+    </p>
+</form>
+
+
+<p>
+    <a asp-creation="Create">Create New</a>
+</p>
+
+<div id="ModelErrors" asp-validation-summary="All" class="text-danger">@TempData["Error"]</div>
+<form asp-action="SelectServicioForEstetica" method="post">
+
+    @*//Aquí insertaremos el Código para mostrar la tabla siguiente*@
+    <table class="table">
+        <thead>
+            <tr>
+                <th width="50%">
+                    Tipo_Servicio
+                </th>
+                <th width="50%">
+                    Servicio
+                </th>
+                <th>
+                    Precio
+                </th>
+                <th>
+                    Tiempo_Duracion
+                </th>
+                <th align="center" width="10%">
+                    Select Servicio
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Servicios.Count() == 0)
+            {
+                <tr><td id="NoServicios" colspan="3">No hay servicios disponibles</td></tr>
+            }
+            else
+            {
+                @foreach (var item in Model.Servicios)
+                {
+                    //Aquí mostramos lo que decimos ' Mostramos al usuario....'
+                    <tr id="Tipo_Servicio_Nombre_@item.Tipo_Servicio.Nombre">
+                        <td width="50%">
+                            @Html.DisplayFor(modelItem => item.Tipo_Servicio.Nombre)
+                        </td>
+                        <td width="50%">
+                            @Html.DisplayFor(modelItem => item.Nombre_Servicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Precio_Servicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tiempo_Duracion)
+                        </td>
+                        <td align="center" width="10%">
+                            <input type="checkbox" name="IdsToAdd" id="Servicio_@item.ServicioID" value="@item.ServicioID" class="form-control">
+                        </td>
+                    </tr>  }}
+        </tbody>
+    </table>
+
+    <button id="nextButton" type="submit" class="btn btn-primary">Next</button>
+    <a asp-action="Index" class="btn btn-default">Cancel</a>
+</form>

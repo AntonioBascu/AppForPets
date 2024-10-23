@@ -1,0 +1,92 @@
+﻿@model AppForPets.Models.Estetica
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Estetica</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cliente.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cliente.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cliente.PrimerApellido)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cliente.PrimerApellido)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cliente.SegundoApellido)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cliente.SegundoApellido)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCompra)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaCompra)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Direccion_correo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Direccion_correo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioTotal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrecioTotal)
+        </dd>
+    </dl>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Nombre Servicio
+                </th>
+                <th>
+                    Precio
+                </th>
+                <th>
+                    Tiempo de Duracion
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Linea_Servicios.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Linea_Servicios.ElementAt<Linea_Servicio>(i).Servicio.Nombre_Servicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Linea_Servicios.ElementAt<Linea_Servicio>(i).Servicio.Precio_Servicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Linea_Servicios.ElementAt<Linea_Servicio>(i).Turno_Servicio)
+                    </td>
+                </tr>
+}
+
+        </tbody>
+    </table>
+</div>
+
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.EsteticaID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+   

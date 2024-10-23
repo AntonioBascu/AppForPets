@@ -1,0 +1,80 @@
+﻿@model AppForPets.Models.CompraProveedorViewModels.SelectProveedorForCompraViewModel
+
+@{
+    ViewData["Title"] = "Seleccionar proveedor para compra";
+}
+
+<h2>Comprar a proveedor</h2>
+
+
+<form asp-controller="CompraProveedors" class="form-horizontal" asp-action="SelectProveedorForCompra" method="get">
+    <p>
+        <div>
+            <label asp-for="nombreProveedor"></label>
+            <input asp-for="nombreProveedor" size="40" />
+            <span asp-validation-for="nombreProveedor" class="text-danger"></span>
+
+            <label asp-for="direccionSeleccionada"></label>
+            <input asp-for="direccionSeleccionada" size="70" />
+            <span asp-validation-for="direccionSeleccionada" class="text-danger"></span>
+            <input id="filtrar" type="submit" value="Filtrar" />
+        </div>
+
+    </p>
+</form>
+
+<div id="ModelErrors" asp-validation-summary="All" class="text-danger"></div>
+<form asp-action="SelectProveedorForCompra" method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th width="50%">
+                    Nombre
+                </th>
+                <th>
+                    Dirección
+                </th>
+                <th>
+                    Teléfono
+                </th>
+                <th>
+                    Correo electrónico
+                </th>
+                <th align="center" width="10%">
+                    Seleccionar proveedor
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Proveedores.Count() == 0)
+            {
+                <tr><td id="NoProveedores" colspan="3">No hay proveedores disponibles</td></tr>
+            }
+            else
+            {
+                @foreach (var item in Model.Proveedores)
+                {
+                    <tr id="nombreProv_@item.Nombre">
+                        <td width="50%">
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Direccion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefono)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CorreoE)
+                        </td>
+                        <td align="center" width="10%">
+                            <input id="Proveedor_@item.IdProveedor" type="radio" name="IdProveedor" value="@item.IdProveedor" class="form-control">
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <button id="siguiente" type="submit" class="btn btn-primary">Siguiente</button>
+    <a asp-action="Index" class="btn btn-default">Cancelar</a>
+</form>

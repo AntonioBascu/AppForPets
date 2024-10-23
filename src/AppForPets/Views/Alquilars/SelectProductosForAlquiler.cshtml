@@ -1,0 +1,69 @@
+﻿@model AppForPets.Models.AlquilarViewModel.SelectProductosForAlquilerViewModel
+
+@{
+    ViewData["Title"] = "Selecciona los productos para alquilar";
+}
+
+<h2>Alquilar productos</h2>
+
+<form asp-controller="Alquilars" class="form-horizontal" aspaction="SelectProductosForAlquiler" method="get">
+    <p>
+        <div>
+            <label asp-for="productoNombre"></label>
+            <input asp-for="productoNombre" size="50" />
+            <span asp-validation-for="productoNombre" class="text-danger"></span>
+            <label asp-for="productoAnimalSelected"></label>
+            <select asp-for="productoAnimalSelected" asp-items="Model.TipoAnimal">
+                <option value="">Todos</option>
+            </select>
+            <input id="filterbyTitleTipoAnimal" type="submit" value="Filtro" />
+        </div>
+    </p>
+</form>
+
+<div id="ModelErrores" asp-validation-summary="All" class="text-danger">@TempData["Error"]</div>
+<form asp-action="SelectProductosForAlquiler" method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th width="30%">
+                    Nombre del producto
+                </th>
+                <th>
+                    Precio
+                </th>
+                <th>
+                    Tipo de animal
+                </th>
+                <th align="center" width="20%">
+                    Marca los deseados
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Productos.Count() == 0)
+            {
+            <tr><td id="NoProductos" colspan="3">No hay productos disponibles</td></tr> }
+            else
+            {
+                @foreach (var item in Model.Productos)
+                {
+                <tr id="Producto_Title_@item.NombreProducto">
+                    <td width="30%">
+                        @Html.DisplayFor(modelItem => item.NombreProducto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrecioAlquiler)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoAnimal.NombreAnimal)
+                    </td>
+                    <td align="center" width="20%">
+                        <input type="checkbox" name="IdsToAdd" id="Producto_@item.ProductoID" value="@item.ProductoID" class="form-control">
+                    </td>
+                </tr>                }            }
+                        </tbody>
+                    </table>
+                    <button id="nextButton" type="submit" class="btn btn-primary">Siguiente</button>
+                    <a asp-action="Index" class="btn btn-default">Cancelar</a>
+                </form>

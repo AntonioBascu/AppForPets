@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Desing.ApplicationUser">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>ApplicationUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Desing.CompraProveedor">
+    <Position X="3.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAgBAAAEACCAAAAAIAAAAEAAAABAA=</HashCode>
+      <FileName>CompraProveedor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Usuario" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="CompraItems" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Desing.CompraProvItem">
+    <Position X="6" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEEAAAAAAAAAgAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>CompraProvItem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Compra" />
+      <Property Name="ProductoProveedor" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Desing.ProductoProveedor">
+    <Position X="9" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAwAAAgAARCAAAgAAAAAAAAAAAAQA=</HashCode>
+      <FileName>ProductoProveedor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Producto" />
+      <Property Name="Proveedor" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="CompraItems" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Desing.Proveedor">
+    <Position X="9" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAACAAgAAAAAAAAAAAAAAAEgAAAQA=</HashCode>
+      <FileName>Proveedor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="ProveedorProductos" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Desing.Producto">
+    <Position X="12" Y="2.75" Width="1.5" />
+    <AssociationLine Name="ProductosProveedor" Type="Desing.ProductoProveedor">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.093" Y="0.085" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAACAAQAQAEAAACAAEAAAAQAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Producto.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TipoAnimal" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="ProductosProveedor" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Desing.TipoAnimal">
+    <Position X="11.75" Y="6.25" Width="1.5" />
+    <AssociationLine Name="Productos" Type="Desing.Producto">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.94" Y="0.193" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAEAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TipoAnimal.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Productos" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,85 @@
+﻿@model AppForPets.Models.CompraViewModels.SelectAnimalesForCompraViewModels
+
+
+@{
+    ViewData["Title"] = "select Animales";
+}
+
+<h1>seleccionar Animales</h1>
+
+<form asp-controller="Compras" class="form-horizontal" asp-action="SelectAnimalesForCompra" method="get">
+    <p>
+        <div>
+            <label asp-for="TipoAnimal"></label>
+            <input asp-for="TipoAnimal" size="50" />
+            <span asp-validation-for="TipoAnimal" class="text-danger"></span>
+
+            @*falta el de precio*@
+
+            <label asp-for="precio"></label>
+            <input asp-for="precio" size="50" />
+            <span asp-validation-for="precio" class="text-danger"></span>
+
+            <input id="filterbyTipoAnimal" type="submit" value="Filter" />
+        </div>
+
+    </p>
+</form>
+
+
+<div id="ModelErrors" asp-validation-summary="All" class="text-danger">@TempData["Error"]</div>
+<form asp-action="SelectAnimalesForCompra" method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Raza
+                </th>
+                <th>
+                    Precio
+                </th>
+                <th>
+                    Cantidad
+                </th>
+                <th>
+                    Edad
+                </th>
+                <th align="center" width="10%">
+                    Select Animales
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Animales.Count() == 0)
+            {
+                <tr><td id="NoAnimales" colspan="3">No hay animales disponibles</td></tr>
+            }
+            else
+            {
+                @foreach (var item in Model.Animales)
+                {
+                    <tr id="Animal_Raza_@item.Tipo.Raza">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tipo.Raza)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Precio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Edad)
+                        </td>
+                        <th align="center" width="10%">
+                            <input type="checkbox" name="IdsToAdd" id="Animal_@item.AnimalID" value="@item.AnimalID" class="form-control">
+                        </th>
+                    </tr>
+                }
+            }
+            </tbody>
+    </table>
+    <button id="nextButton" type="submit" class="btn btn-primary">Next</button>
+    <a asp-action="Index" class="btn btn-default">Cancel</a>
+</form>

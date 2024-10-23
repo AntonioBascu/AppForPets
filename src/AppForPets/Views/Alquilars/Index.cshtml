@@ -1,0 +1,54 @@
+﻿@model IEnumerable<AppForPets.Models.Alquilar>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<p>
+    <a id="SelectProductosForAlquiler" asp-action="SelectProductosForAlquiler">Nuevo alquiler</a>
+</p>
+<form asp-controller="Alquilars" asp-action="Index" method="get">
+    <p>
+        Nombre: <input type="text" name="SearchString">
+        <input type="submit" value="Filtro" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaFin)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrecioTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaInicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaFin)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.AlquilarID">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.AlquilarID">Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.AlquilarID">Borrar</a>
+                    <a asp-action="SelectProductosForAlquiler" asp-route-id="@item.AlquilarID">Seleccionar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
